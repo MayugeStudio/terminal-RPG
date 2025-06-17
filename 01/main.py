@@ -13,8 +13,8 @@ if scene == MENU:
 elif scene == GAME:
     print("----------------------------------------")
     print('1: Walk')
-    print('2: Run')
-    print('3: Save and quit game')
+    print('2: Save and quit game')
+    print('3: Stay here')
     print("----------------------------------------")
     input('#')
 
