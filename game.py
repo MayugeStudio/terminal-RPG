@@ -21,23 +21,41 @@ TITLE_STR = """
 
 
 def clear():
+    """
+    画面を削除する
+    """
     os.system("cls" if os.name == "nt" else "clear")
 
 def sleep(ms: int):
+    """
+    プログラムを指定された時間だけ止める
+    """
     time.sleep(ms/1000)
 
 def separator():
+    """
+    区切り文字を表示する
+    """
     print("-" * 50)
 
 
 def ask_input() -> str:
+    """
+    ユーザから入力を受け取る
+    """
     return input("# ")
 
 
 def wait_input() -> None:
+    """
+    ユーザの入力を待つ
+    """
     input("> ")
 
 def verify_input(expect: list[int]) -> str:
+    """
+    入力を検証する
+    """
     choice = ask_input()
     while choice not in expect:
         print("-- 入力が間違っているわ。")
@@ -71,6 +89,9 @@ def dialogue_slow(prefix: str, message: str) -> None:
     print()
 
 def home_scene() -> None:
+    """
+    選択肢を選ぶ画面
+    """
     clear()
     dialogue_slow("--", "ここは村の近くの森よ")
     dialogue_slow("--", "とはいえ、いつ何が襲ってくるかわからないから気を付けて。")
@@ -141,6 +162,9 @@ def start_game() -> None:
 
 
 def main() -> None:
+    """
+    メイン関数 （エントリーポイント）
+    """
     clear()
 
     print(TITLE_STR)
