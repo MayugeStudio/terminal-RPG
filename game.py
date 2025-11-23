@@ -3,9 +3,6 @@ import time
 import random
 from .constants import TITLE_STR
 
-game_play = True
-scene = "home"
-
 def game() -> None:
     clear()
     # 名前を聞く
