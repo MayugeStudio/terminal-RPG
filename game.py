@@ -1,55 +1,12 @@
 import os
 import time
+import random
 from .constants import TITLE_STR
 
+game_play = True
+scene = "home"
 
-def home_scene() -> None:
-    """
-    選択肢を選ぶ画面
-    """
-    clear()
-    dialogue_slow("--", "ここは村の近くの森よ")
-    dialogue_slow("--", "とはいえ、いつ何が襲ってくるかわからないから気を付けて。")
-    print()
-    wait_input()
-
-    while True:
-        clear()
-        separator()
-        dialogue("--", "どうするか選んで。")
-        separator()
-        # TODO: [COST]を何かしらのオブジェクトで管理
-        print("1. 森の奥へ進む [1日]")
-        print("2. 村の方へ引き返す [2日]")
-        print("3. 休憩する [1日]")
-        separator()
-        choice = verify_input(["1", "2", "3"])
-
-        if choice == "1":
-            wait_input()
-        elif choice == "2":
-            dialogue_slow("--", "村に引き返すのね。")
-            dialogue_slow("[ナレーション]", "：家に帰って休んだ！")
-            wait_input()
-        elif choice == "3":
-            dialogue("--", "心の底から休んでね。")
-            for i in range(3):
-                print("", ".")
-                sleep(300)
-            # TODO: 成功と失敗がほしい
-            dialogue_slow("[ナレーション]", "：心の底から休んだ！")
-            wait_input()
-
-        else:
-            dev_assertion("home_scene")
-
-
-
-def battle_scene() -> None:
-    pass
-
-
-def start_game() -> None:
+def game() -> None:
     clear()
     # 名前を聞く
     ask_name = True
@@ -71,7 +28,49 @@ def start_game() -> None:
 
     while game_play:
         if scene == "home":
-            home_scene()
+            clear()
+            dialogue_slow("--", "ここは村の近くの森よ")
+            dialogue_slow("--", "とはいえ、いつ何が襲ってくるかわからないから気を付けて。")
+            print()
+            wait_input()
+
+            while True:
+                clear()
+                separator()
+                dialogue("--", "どうするか選んで。")
+                separator()
+                # TODO: [COST]を何かしらのオブジェクトで管理
+                print("1. 森の奥へ進む [1日]")
+                print("2. 村の方へ引き返す [2日]")
+                print("3. 休憩する [1日]")
+                separator()
+                choice = verify_input(["1", "2", "3"])
+
+                if choice == "1":
+                    wait_input()
+                    rand = random.randint(1, 2)
+                    if rand == 1:
+                        scene = "battle"
+                    else:
+                        dialogue_slow("--", "何かの気配がするわ。")
+                        dialogue_slow("--", "気を付けて進みましょう。")
+
+                elif choice == "2":
+                    dialogue_slow("--", "村に引き返すのね。")
+                    dialogue_slow("[ナレーション]", "：家に帰って休んだ！")
+                    wait_input()
+                elif choice == "3":
+                    dialogue("--", "心の底から休んでね。")
+                    for i in range(3):
+                        print("", ".")
+                        sleep(300)
+                    # TODO: 成功と失敗がほしい
+                    dialogue_slow("[ナレーション]", "：心の底から休んだ！")
+                    wait_input()
+
+                else:
+                    dev_assertion("home")
+
         elif scene == "battle":
             battle_scene()
 
@@ -102,7 +101,7 @@ def main() -> None:
             print("もう一度入力してね。")
 
     # ゲームスタート
-    start_game()
+    game()
 
 
 
