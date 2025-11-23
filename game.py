@@ -2,6 +2,7 @@ import os
 import time
 import random
 from .constants import TITLE_STR
+from utilities import *
 
 def game() -> None:
     clear()
